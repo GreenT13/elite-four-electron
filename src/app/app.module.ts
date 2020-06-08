@@ -17,9 +17,11 @@ import { HeaderButtonComponent } from './elitefour/base/header-button/header-but
 import { ListDetailComponent } from './elitefour/pages/list-detail/list-detail.component';
 import { ListOverviewComponent } from './elitefour/pages/list-overview/list-overview.component';
 import { AddListFormModalComponent } from './elitefour/base/add-list-form-modal/add-list-form-modal.component';
+import { SettingsComponent } from './elitefour/pages/settings/settings.component';
+import { MenuComponent } from './elitefour/menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, AddListFormModalComponent],
+  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, AddListFormModalComponent, SettingsComponent, MenuComponent],
   imports: [
     BrowserModule,
     FormsModule,
