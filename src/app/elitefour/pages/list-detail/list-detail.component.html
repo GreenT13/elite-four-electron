@@ -1,0 +1,48 @@
+<app-content-header title="Lists">
+  <app-content-header-button btnClass="btn-danger" (click)="log('Delete')">Delete</app-content-header-button>
+  <app-content-header-button btnClass="btn-success" (click)="log('Start')">Start</app-content-header-button>
+</app-content-header>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <div class="card ">
+      <div class="card-body">
+        <div class="content-header-wrapper justify-content-between d-flex align-items-center">
+          <p class="p-0 m-0">
+            Total number of items<br/>
+            Number of favorites picked
+          </p>
+          <p class="p-0 m-0 text-right">
+            {{favoriteList.nrOfItems}}<br/>
+            {{favoriteList.nrOfFavoritesPicked}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card ">
+      <div class="card-body">
+        <div class="content-header-wrapper justify-content-between d-flex align-items-center">
+          <p class="p-0 m-0">
+            Timestamp created<br/>
+            Status
+          </p>
+          <p class="p-0 m-0 text-right">
+            {{favoriteList.tsCreated | date: 'dd-MM-yy HH:mm'}}<br/>
+            {{favoriteList.status}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-content-header title="Items">
+  <app-content-header-button (click)="log('New item')">New item</app-content-header-button>
+  <app-content-header-button (click)="log('Import')">Import</app-content-header-button>
+  <app-content-header-button (click)="log('Export')">Export</app-content-header-button>
+</app-content-header>
+
+<app-card-list title="Item 1" [addBottomMargin]=false (onDelete)="log('info')" (onEdit)="log('edit')"></app-card-list>
+<app-card-list title="Item 2" [addBottomMargin]=false (onDelete)="log('info')" (onEdit)="log('edit')"></app-card-list>
