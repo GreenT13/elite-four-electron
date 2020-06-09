@@ -4,6 +4,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddListFormModalComponent} from "../../base/add-list-form-modal/add-list-form-modal.component";
 import {FavoriteListApi} from "../../backend/favorite-list-api";
 import {FavoriteList} from "../../backend/favorite-list-interfaces";
+import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-sure-modal.component";
 
 @Component({
   selector: 'app-list-overview',
@@ -39,7 +40,12 @@ export class ListOverviewComponent implements OnInit {
   }
 
   deleteList(listId: number) {
-    this.favoriteListApi.deleteFavoriteList(listId)
+    const modalRef = this.modalService.open(AreYouSureModalComponent)
+    modalRef.result.then((result) => {
+      if (result) {
+        this.favoriteListApi.deleteFavoriteList(listId)
+      }
+    })
   }
 
   log() {

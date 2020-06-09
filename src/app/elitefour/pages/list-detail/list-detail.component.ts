@@ -4,6 +4,7 @@ import {FavoriteItem, FavoriteList} from "../../backend/favorite-list-interfaces
 import {FavoriteListApi} from "../../backend/favorite-list-api";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ItemFormModalComponent} from "../../base/item-form-modal/item-form-modal.component";
+import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-sure-modal.component";
 
 @Component({
   selector: 'app-list-detail',
@@ -25,11 +26,15 @@ export class ListDetailComponent implements OnInit {
   ngOnInit(): void {
     const listId = +this.route.snapshot.paramMap.get('id');
     this.favoriteListApi.getFavoriteListById(listId)
-      .subscribe((favoriteList) => {this.favoriteList = favoriteList;})
+      .subscribe((favoriteList) => {
+        this.favoriteList = favoriteList;
+      })
   }
 
   determineNumberOfFavoriteItemsPicked() {
-    return this.favoriteList.items.filter((item)=> { !!item.favoritePosition }).length
+    return this.favoriteList.items.filter((item) => {
+      !!item.favoritePosition
+    }).length
   }
 
   openItemModal(favoriteItem: FavoriteItem) {
@@ -42,7 +47,12 @@ export class ListDetailComponent implements OnInit {
   }
 
   deleteItem(itemId: number) {
-    this.favoriteListApi.deleteItemFromFavoriteList(this.favoriteList.id, itemId);
+    const modalRef = this.modalService.open(AreYouSureModalComponent)
+    modalRef.result.then((result) => {
+      if (result) {
+        this.favoriteListApi.deleteItemFromFavoriteList(this.favoriteList.id, itemId);
+      }
+    })
   }
 
 }
