@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {FavoriteListCrud} from "../../backend/favorite-list-crud";
+import {FavoriteListApi} from "../../backend/favorite-list-api";
 
 @Component({
   selector: 'app-add-list-form',
@@ -31,11 +31,11 @@ export class AddListFormModalComponent implements OnInit {
   listName: string = ''
 
   constructor(public activeModal: NgbActiveModal,
-              private favoriteListApi: FavoriteListCrud) {
+              private favoriteListApi: FavoriteListApi) {
   }
 
   onSubmit() {
-    this.favoriteListApi.addFavoriteList(this.listName);
+    this.favoriteListApi.addNewFavoriteList(this.listName);
     this.activeModal.close("Submit");
   }
 

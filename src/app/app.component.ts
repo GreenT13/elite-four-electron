@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ElectronService } from './core/services';
-import { AppConfig } from '../environments/environment';
+import {Component} from '@angular/core';
+import {ElectronService} from './core/services';
+import {AppConfig} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { AppConfig } from '../environments/environment';
 })
 export class AppComponent {
   constructor(
-    public electronService: ElectronService,
+    public electronService: ElectronService
   ) {
     console.log('AppConfig', AppConfig);
 

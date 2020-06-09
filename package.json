@@ -70,5 +70,7 @@
   "engines": {
     "node": ">=10.13.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "electron-store": "^5.2.0"
+  }
 }
