@@ -47,12 +47,14 @@ export class FavoriteListApi implements IFavoriteListApi {
   }
 
   addNewFavoriteList(listName: string) {
+    if (!listName) {
+      throw new Error('You must set a name')
+    }
+
     const nameExists: boolean = !!this.favoriteLists.find(favoriteList => favoriteList.name == listName);
 
     if (nameExists) {
-      console.error('List with the same name already exists!')
-      // TODO: learn how to throw errors?
-      return null;
+      throw new Error('List with the same name already exists');
     }
 
     const favoriteList: FavoriteList = this.favoriteListDatabase.createNewList(listName);
@@ -72,9 +74,7 @@ export class FavoriteListApi implements IFavoriteListApi {
     const itemExists: boolean = !!favoriteList.items.find(item => item.name == itemName)
 
     if(itemExists) {
-      console.error('Item with the same name already exists!')
-      // TODO: learn how to throw errors?
-      return null;
+      throw new Error('Item with the same name already exists')
     }
 
     favoriteList.items.push(this.favoriteListDatabase.createNewItem(favoriteList, itemName))
@@ -86,9 +86,7 @@ export class FavoriteListApi implements IFavoriteListApi {
     const itemInList: FavoriteItem = favoriteList.items.find(item => item.id == updatedItem.id)
 
     if(!itemInList) {
-      console.error('Item does not exist!')
-      // TODO: learn how to throw errors?
-      return null;
+      throw new Error('Item ' + updatedItem.id + ' does not exist. Contact administrator.')
     }
 
     const itemIndex = favoriteList.items.indexOf(itemInList);

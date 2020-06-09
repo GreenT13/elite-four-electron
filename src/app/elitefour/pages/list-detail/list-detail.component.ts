@@ -51,8 +51,7 @@ export class ListDetailComponent implements OnInit {
     modalRef.result.then((result) => {
       if (result) {
         this.favoriteListApi.deleteItemFromFavoriteList(this.favoriteList.id, itemId);
-      }
-    })
+      }}, () => {})
   }
 
 }

@@ -44,8 +44,7 @@ export class ListOverviewComponent implements OnInit {
     modalRef.result.then((result) => {
       if (result) {
         this.favoriteListApi.deleteFavoriteList(listId)
-      }
-    })
+      }}, () => {})
   }
 
   log() {

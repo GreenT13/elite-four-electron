@@ -16,7 +16,8 @@ import {FavoriteItem} from "../../backend/favorite-list-interfaces";
       <div class="modal-body">
         <div class="form-group">
           <!--suppress HtmlUnknownAttribute -->
-          <input ngbAutofocus type="text" class="form-control" id="itemName" [(ngModel)]="favoriteItem.name" name="itemName">
+          <input ngbAutofocus type="text" class="form-control" id="itemName" [(ngModel)]="itemName" name="itemName">
+          <div class="alert alert-danger" *ngIf="!!error">{{error}}</div>
         </div>
       </div>
       <div class="modal-footer">
@@ -31,17 +32,26 @@ import {FavoriteItem} from "../../backend/favorite-list-interfaces";
 export class ItemFormModalComponent implements OnInit {
   @Input() listId: number
   @Input() favoriteItem: FavoriteItem
+  itemName: string = ''
   isEditMode: boolean
+  error: string
 
   constructor(public activeModal: NgbActiveModal,
               private favoriteListApi: FavoriteListApi) {
   }
 
   onSubmit() {
-    if (this.isEditMode) {
-      this.favoriteListApi.updateItemForFavoriteList(this.listId, this.favoriteItem);
-    } else {
-      this.favoriteListApi.addItemToFavoriteList(this.listId, this.favoriteItem.name);
+    try {
+      if (this.isEditMode) {
+        // Create a new item so that in case the update goes wrong we didn't update the incoming item (which is shown on the screen).
+        this.favoriteListApi.updateItemForFavoriteList(this.listId, {id: this.favoriteItem.id, name: this.itemName});
+      } else {
+        this.favoriteListApi.addItemToFavoriteList(this.listId, this.favoriteItem.name);
+      }
+    } catch (error) {
+      this.error = error.message
+      // Do not close form if we could not submit properly.
+      return false;
     }
     this.activeModal.close("Submit");
   }
@@ -49,9 +59,8 @@ export class ItemFormModalComponent implements OnInit {
   ngOnInit() {
     this.isEditMode = !!this.favoriteItem
 
-    // We use the favoriteItem as model, so set it to empty value if we are not in edit mode.
-    if (!this.isEditMode) {
-      this.favoriteItem = {id: 0, name: ''}
+    if (this.isEditMode) {
+      this.itemName = this.favoriteItem.name;
     }
   }
 
