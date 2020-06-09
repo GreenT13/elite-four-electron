@@ -17,11 +17,12 @@ export class FavoriteListDatabase {
   }
 
   private save(favoriteLists: FavoriteList[]) {
+    console.log('Going to save', favoriteLists);
     this.store.set('favoriteLists', favoriteLists);
   }
 
   private generateListId(): number {
-    return Math.max(this.store.get('favoriteLists').map(list => list.id), 0) + 1;
+    return Math.max(...this.store.get('favoriteLists').map(list => list.id), 0) + 1;
   }
 
   // noinspection JSMethodCanBeStatic
