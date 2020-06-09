@@ -37,12 +37,13 @@ export class FavoriteListApi implements IFavoriteListApi {
     return this.favoriteListsSubject.asObservable();
   }
 
-  getFavoriteListByName(listName: string): FavoriteList {
-    return this.favoriteLists.find(favoriteList => favoriteList.name == listName);
-  }
-
-  getFavoriteListById(listId: number): FavoriteList {
-    return this.favoriteLists.find(favoriteList => favoriteList.id == listId);
+  getFavoriteListById(listId: number): Observable<FavoriteList> {
+    return new Observable<FavoriteList>((observer) => {
+      this.getFavoriteLists().subscribe((favoriteLists) => {
+          observer.next(favoriteLists.find(favoriteList => favoriteList.id == listId))
+      }
+      )
+    })
   }
 
   addNewFavoriteList(listName: string) {

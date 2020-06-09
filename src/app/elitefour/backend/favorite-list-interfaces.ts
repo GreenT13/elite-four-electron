@@ -22,8 +22,7 @@ export enum FavoriteListStatus {
 
 export type IFavoriteListApi = {
   getFavoriteLists(): Observable<FavoriteList[]>
-  getFavoriteListByName(listName: string): FavoriteList
-  getFavoriteListById(listId: number): FavoriteList
+  getFavoriteListById(listId: number): Observable<FavoriteList>
   addNewFavoriteList(listName: string)
   deleteFavoriteList(listId: number)
   addItemToFavoriteList(listId: number, itemName: string)
