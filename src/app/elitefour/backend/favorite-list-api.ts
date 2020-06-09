@@ -50,7 +50,7 @@ export class FavoriteListApi implements IFavoriteListApi {
     const nameExists: boolean = !!this.favoriteLists.find(favoriteList => favoriteList.name == listName);
 
     if (nameExists) {
-      console.log('List with the same name already exists!')
+      console.error('List with the same name already exists!')
       // TODO: learn how to throw errors?
       return null;
     }
@@ -72,7 +72,7 @@ export class FavoriteListApi implements IFavoriteListApi {
     const itemExists: boolean = !!favoriteList.items.find(item => item.name == itemName)
 
     if(itemExists) {
-      console.log('Item with the same name already exists!')
+      console.error('Item with the same name already exists!')
       // TODO: learn how to throw errors?
       return null;
     }

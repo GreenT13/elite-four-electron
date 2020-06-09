@@ -21,12 +21,12 @@ export class FavoriteListDatabase {
   }
 
   private generateListId(): number {
-    return Math.max(this.store.get('favoriteLists').map(list => list.id)) + 1;
+    return Math.max(this.store.get('favoriteLists').map(list => list.id), 0) + 1;
   }
 
   // noinspection JSMethodCanBeStatic
   private generateItemId(favoriteList: FavoriteList): number {
-    return Math.max(...favoriteList.items.map(item => item.id)) + 1;
+    return Math.max(...favoriteList.items.map(item => item.id), 0) + 1;
   }
 
   getLists(): FavoriteList[] {
