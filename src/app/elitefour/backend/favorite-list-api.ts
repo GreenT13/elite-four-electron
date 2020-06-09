@@ -81,6 +81,21 @@ export class FavoriteListApi implements IFavoriteListApi {
     this.save();
   }
 
+  updateItemForFavoriteList(listId: number, updatedItem: FavoriteItem) {
+    const favoriteList: FavoriteList = this.findListById(listId);
+    const itemInList: FavoriteItem = favoriteList.items.find(item => item.id == updatedItem.id)
+
+    if(!itemInList) {
+      console.error('Item does not exist!')
+      // TODO: learn how to throw errors?
+      return null;
+    }
+
+    const itemIndex = favoriteList.items.indexOf(itemInList);
+    favoriteList.items[itemIndex] = updatedItem;
+    this.save();
+  }
+
   deleteItemFromFavoriteList(listId: number, itemId: number) {
     const items = this.findListById(listId).items;
     const favoriteItem: FavoriteItem = this.findItemById(listId, itemId);

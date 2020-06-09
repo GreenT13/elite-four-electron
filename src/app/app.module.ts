@@ -19,10 +19,11 @@ import { ListOverviewComponent } from './elitefour/pages/list-overview/list-over
 import { AddListFormModalComponent } from './elitefour/base/add-list-form-modal/add-list-form-modal.component';
 import { SettingsComponent } from './elitefour/pages/settings/settings.component';
 import { MenuComponent } from './elitefour/menu/menu.component';
-import { AddItemFormModalComponent } from './elitefour/base/add-item-form-modal/add-item-form-modal.component';
+import { ItemFormModalComponent } from './elitefour/base/item-form-modal/item-form-modal.component';
+import { AreYouSureModalComponent } from './elitefour/base/are-you-sure-modal/are-you-sure-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, AddListFormModalComponent, SettingsComponent, MenuComponent, AddItemFormModalComponent],
+  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, AddListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent],
   imports: [
     BrowserModule,
     FormsModule,

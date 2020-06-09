@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {FavoriteList} from "../../backend/favorite-list-interfaces";
+import {FavoriteItem, FavoriteList} from "../../backend/favorite-list-interfaces";
 import {FavoriteListApi} from "../../backend/favorite-list-api";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AddItemFormModalComponent} from "../../base/add-item-form-modal/add-item-form-modal.component";
+import {ItemFormModalComponent} from "../../base/item-form-modal/item-form-modal.component";
 
 @Component({
   selector: 'app-list-detail',
@@ -32,9 +32,13 @@ export class ListDetailComponent implements OnInit {
     return this.favoriteList.items.filter((item)=> { !!item.favoritePosition }).length
   }
 
-  openAddNewItemModal() {
-    const modalRef = this.modalService.open(AddItemFormModalComponent)
+  openItemModal(favoriteItem: FavoriteItem) {
+    const modalRef = this.modalService.open(ItemFormModalComponent)
     modalRef.componentInstance.listId = this.favoriteList.id
+
+    if (!!favoriteItem) {
+      modalRef.componentInstance.favoriteItem = favoriteItem
+    }
   }
 
   deleteItem(itemId: number) {
