@@ -46,7 +46,7 @@ export class ItemFormModalComponent implements OnInit {
         // Create a new item so that in case the update goes wrong we didn't update the incoming item (which is shown on the screen).
         this.favoriteListApi.updateItemForFavoriteList(this.listId, {id: this.favoriteItem.id, name: this.itemName});
       } else {
-        this.favoriteListApi.addItemToFavoriteList(this.listId, this.favoriteItem.name);
+        this.favoriteListApi.addItemToFavoriteList(this.listId, this.itemName);
       }
     } catch (error) {
       this.error = error.message
