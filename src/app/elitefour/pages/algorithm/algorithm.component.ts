@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FavoriteItemApi} from "../../backend/favorite-item-api";
-import {FavoriteItem, FavoriteList} from "../../backend/favorite-list-interfaces";
+import {FavoriteItem, FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-interfaces";
 
 @Component({
   selector: 'app-algorithm',
@@ -27,12 +27,19 @@ export class AlgorithmComponent implements OnInit {
   }
 
   private initializeNextStep() {
-    this.selectedItems = []
-    this.toBeChosenItems = this.favoriteItemApi.getNextItems();
+    // If the list is finished, we automatically redirect to the main screen.
+    if (this.favoriteList.status == FavoriteListStatus.FINISHED) {
+      this.router.navigate(['/list/' + this.favoriteList.id])
+    } else {
+      this.selectedItems = []
+      this.toBeChosenItems = this.favoriteItemApi.getNextItems();
+    }
   }
 
   skip() {
-
+    // Skipping is the same as selecting all the items.
+    this.favoriteItemApi.selectItems(this.toBeChosenItems)
+    this.initializeNextStep()
   }
 
   select() {
