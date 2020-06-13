@@ -10,9 +10,9 @@ import {FavoriteItem, FavoriteList, FavoriteListStatus} from "../../backend/favo
 })
 export class AlgorithmComponent implements OnInit {
   private favoriteList: FavoriteList
-  // noinspection JSMismatchedCollectionQueryUpdate
-  private toBeChosenItems: FavoriteItem[]
+  toBeChosenItems: FavoriteItem[]
   private selectedItems: FavoriteItem[]
+  newFavorites: FavoriteItem[] = []
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -43,7 +43,7 @@ export class AlgorithmComponent implements OnInit {
   }
 
   select() {
-    this.favoriteItemApi.selectItems(this.selectedItems)
+    this.newFavorites = this.favoriteItemApi.selectItems(this.selectedItems)
     this.initializeNextStep()
   }
 
