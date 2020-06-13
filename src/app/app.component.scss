@@ -1,9 +1,6 @@
 #content {
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 40px);
   padding: 20px 40px;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
   max-width: 1200px;
 }
