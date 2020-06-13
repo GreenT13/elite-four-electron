@@ -1,6 +1,6 @@
 <app-content-header title="{{favoriteList.name}}">
   <app-content-header-button btnClass="btn-danger" (click)="log('Delete')">Delete</app-content-header-button>
-  <app-content-header-button btnClass="btn-success" (click)="log('Start')">Start</app-content-header-button>
+  <app-content-header-button btnClass="btn-success" (click)="router.navigate(['/list/' + favoriteList.id + '/algorithm']);">Start</app-content-header-button>
 </app-content-header>
 
 <div class="row mb-4">
@@ -44,5 +44,5 @@
   <app-content-header-button (click)="log('Export')">Export</app-content-header-button>
 </app-content-header>
 
-<app-card-list *ngFor="let item of favoriteList.items" title="{{item.name}}" [addBottomMargin]=false
+<app-card-list *ngFor="let item of favoriteList.items" title="{{item.name}} ({{item.favoritePosition}})" [addBottomMargin]=false
                (onDelete)="deleteItem(item.id)" (onEdit)="openItemModal(item)"></app-card-list>

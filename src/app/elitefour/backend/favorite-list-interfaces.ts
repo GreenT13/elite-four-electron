@@ -11,7 +11,9 @@ export type FavoriteList = {
 export type FavoriteItem = {
   id: number,
   name: string,
-  favoritePosition?: number
+  favoritePosition?: number,
+  eliminatedBy: number[],
+  toBeChosen: boolean
 }
 
 export enum FavoriteListStatus {
@@ -29,4 +31,5 @@ export type IFavoriteListApi = {
   deleteItemFromFavoriteList(listId: number, itemId: number)
   setStatus(listId: number, status: FavoriteListStatus)
   setFavoritePosition(listId: number, itemId: number, position: number)
+  saveList(favoriteList: FavoriteList)
 }

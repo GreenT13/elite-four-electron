@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FavoriteItem, FavoriteList} from "../../backend/favorite-list-interfaces";
 import {FavoriteListApi} from "../../backend/favorite-list-api";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -19,6 +19,7 @@ export class ListDetailComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private favoriteListApi: FavoriteListApi,
               private modalService: NgbModal) {
   }

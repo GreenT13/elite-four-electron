@@ -1,0 +1,36 @@
+<app-content-header title="{{favoriteList.name}}">
+  <app-content-header-button btnClass="btn-secondary" (click)="router.navigate(['/list/' + favoriteList.id]);">Return to list</app-content-header-button>
+</app-content-header>
+
+
+<div id="accordion" class="mb-4">
+  <div class="card">
+    <div class="card-body" id="headingOne">
+      <button class="btn m-0 p-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+              aria-controls="collapseOne">
+        New favorites <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body pt-0 small">
+        Item 1<br/>
+        Item 2
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-content-header title="Items">
+  <app-content-header-button btnClass="btn btn-danger" (click)="skip()">Skip</app-content-header-button>
+  <app-content-header-button btnClass="btn btn-primary" (click)="select()">Select</app-content-header-button>
+</app-content-header>
+
+
+<div class="card" *ngFor="let item of toBeChosenItems">
+  <a class="selectable-item" [ngClass]="isItemSelected(item) ? 'selected' : ''" (click)="clickItem(item)">
+    <div class="card-body">
+      <p class="p-0 m-0">{{item.name}}</p>
+    </div>
+  </a>
+</div>

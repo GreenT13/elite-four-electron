@@ -33,6 +33,18 @@ export class FavoriteListApi implements IFavoriteListApi {
 
 
 
+  saveList(favoriteList: FavoriteList) {
+    const favoriteListInlist: FavoriteList = this.favoriteLists.find(list => list.id == favoriteList.id)
+
+    if(!favoriteListInlist) {
+      throw new Error('List ' + favoriteList.id + ' does not exist. Contact administrator.')
+    }
+
+    const listIndex = this.favoriteLists.indexOf(favoriteListInlist);
+    this.favoriteLists[listIndex] = favoriteList;
+    this.save();
+  }
+
   getFavoriteLists(): Observable<FavoriteList[]> {
     return this.favoriteListsSubject.asObservable();
   }

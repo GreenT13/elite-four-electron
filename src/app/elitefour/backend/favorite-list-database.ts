@@ -39,7 +39,7 @@ export class FavoriteListDatabase {
   }
 
   createNewItem(favoriteList: FavoriteList, itemName: string): FavoriteItem {
-    return {id: this.generateItemId(favoriteList), name: itemName};
+    return {id: this.generateItemId(favoriteList), name: itemName, eliminatedBy: [], toBeChosen: false};
   }
 
   saveLists(favoriteLists: FavoriteList[]) {
