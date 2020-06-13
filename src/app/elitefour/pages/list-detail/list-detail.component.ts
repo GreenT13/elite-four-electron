@@ -33,9 +33,7 @@ export class ListDetailComponent implements OnInit {
   }
 
   determineNumberOfFavoriteItemsPicked() {
-    return this.favoriteList.items.filter((item) => {
-      !!item.favoritePosition
-    }).length
+    return this.favoriteList.items.filter((item) => !!item.favoritePosition).length
   }
 
   openItemModal(favoriteItem: FavoriteItem) {
