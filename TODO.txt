@@ -1,15 +1,6 @@
-== Navigation ==
-I need some kind of breadcrumb/navigation bar so you can at least go to the home page. Or maybe a back button on the list screen, would that be sufficient?
-
 == File stuff ==
 - Import
 - Export
-
-== Algorithm ==
-Everything needed to get the real algorithm working:
-- Create a page where items are shown that you can select
-- Create algorithm in the backend
-- Add editable variable on the list to indicate how many elements need to be shown on the screen
 
 == UX things ==
 - Popup for editing list details
@@ -22,3 +13,15 @@ Everything needed to get the real algorithm working:
 - Filtering on items (either by user or use some sensible default like first all favorites, then alphabetically)
 - Choose between showing the cards in blocks or in lines (if names are small and you have a big screen, this is more efficient).
   Add buttons with <i class="fas fa-th"></i> and <i class="fas fa-bars"></i> or <i class="fas fa-th-list"></i>. You get the jist.
+
+== Concrete small actions ==
+1. Remove run button from overview screen.
+2. Only be able to start a list if status is created. Make text continue if status of list is ongoing.
+3. Remove edit+remove button if the status is ongoing / finished.
+4. Give finished, ongoing and created a color on the screens.
+5. Remove new-item button if status is ongoing / finished.
+6. Make a nice badge for the favorite number if position is determined.
+7. Add sorting on items: first on favorite, then by id.
+8. Make it impossible to add an item with no name (for list this is fixed).
+9. Create a reset-algorithm button.
+10. Create a remove-all items button.
