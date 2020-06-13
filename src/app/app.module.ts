@@ -22,9 +22,10 @@ import { MenuComponent } from './elitefour/menu/menu.component';
 import { ItemFormModalComponent } from './elitefour/base/item-form-modal/item-form-modal.component';
 import { AreYouSureModalComponent } from './elitefour/base/are-you-sure-modal/are-you-sure-modal.component';
 import { AlgorithmComponent } from './elitefour/pages/algorithm/algorithm.component';
+import { HelpComponent } from './elitefour/pages/help/help.component';
 
 @NgModule({
-  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, AddListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent, AlgorithmComponent],
+  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, AddListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent, AlgorithmComponent, HelpComponent],
   imports: [
     BrowserModule,
     FormsModule,
