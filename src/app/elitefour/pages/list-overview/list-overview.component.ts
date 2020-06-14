@@ -13,7 +13,7 @@ import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-su
       <app-content-header-button (click)="openAddNewListModal()">New</app-content-header-button>
     </app-content-header>
 
-    <app-card-list *ngFor="let favoriteList of favoriteLists"
+    <app-card-list *ngFor="let favoriteList of sortByTsCreated(favoriteLists)"
                    [title]="favoriteList.name"
                    (onDelete)="deleteList(favoriteList.id)"
                    (onInfo)="navigateToList(favoriteList.id)">{{favoriteList.status}}</app-card-list>
@@ -49,13 +49,16 @@ export class ListOverviewComponent implements OnInit {
     })
   }
 
-  log() {
-    console.log('Callback')
-  }
-
   navigateToList(listId: number) {
     // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['/list/' + listId]);
+  }
+
+  sortByTsCreated(favoriteLists: FavoriteList[]) {
+    // Newest lists must be on top.
+    return favoriteLists.sort((a,b) => {
+      return new Date(b.tsCreated).getTime() - new Date(a.tsCreated).getTime()
+    })
   }
 
 }
