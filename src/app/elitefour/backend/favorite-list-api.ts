@@ -129,5 +129,17 @@ export class FavoriteListApi implements IFavoriteListApi {
     this.save();
   }
 
+  resetAlgorithm(listId: number) {
+    const favoriteList: FavoriteList = this.findListById(listId);
+    favoriteList.status = FavoriteListStatus.CREATED;
+    favoriteList.items.forEach((item) => {
+      item.favoritePosition = undefined
+      item.eliminatedBy = []
+      item.toBeChosen = false
+    })
+
+    this.save()
+  }
+
 }
 

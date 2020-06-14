@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -6,6 +6,9 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
   template: `
     <div class="modal-header">
       <h4 class="modal-title">Are you sure?</h4>
+    </div>
+    <div class="modal-body" *ngIf="!!body">
+      {{body}}
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" (click)="activeModal.close(false)">No</button>
@@ -15,6 +18,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
   styles: []
 })
 export class AreYouSureModalComponent implements OnInit {
+  @Input() body?: string
 
   constructor(public activeModal: NgbActiveModal) {
   }

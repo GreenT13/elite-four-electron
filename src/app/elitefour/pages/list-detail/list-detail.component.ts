@@ -77,5 +77,15 @@ export class ListDetailComponent implements OnInit {
     });
   }
 
+  resetAlgorithm() {
+    const modalRef = this.modalService.open(AreYouSureModalComponent)
+    modalRef.componentInstance.body =
+      "Resetting the algorithm will clear all the favorites you picked and set the status of the list to created. " +
+      "No items will be deleted."
+    modalRef.result.then((result) => {
+      if (result) {
+        this.favoriteListApi.resetAlgorithm(this.favoriteList.id);
+      }}, () => {})
+  }
 }
 
