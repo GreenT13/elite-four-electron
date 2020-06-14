@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {FavoriteItem, FavoriteList} from "../../backend/favorite-list-interfaces";
+import {FavoriteItem, FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-interfaces";
 import {FavoriteListApi} from "../../backend/favorite-list-api";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ItemFormModalComponent} from "../../base/item-form-modal/item-form-modal.component";
@@ -12,6 +12,10 @@ import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-su
   styles: []
 })
 export class ListDetailComponent implements OnInit {
+  // A field has to be created, otherwise it cannot be used in the HTML template.
+  readonly FINISHED = FavoriteListStatus.FINISHED;
+  readonly ONGOING = FavoriteListStatus.ONGOING;
+
   favoriteList: FavoriteList = {id: 0, name: '', status: undefined, tsCreated: new Date(), items: []}
 
   log(x) {
