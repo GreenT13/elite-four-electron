@@ -7,6 +7,7 @@ import {ItemFormModalComponent} from "../../base/item-form-modal/item-form-modal
 import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-sure-modal.component";
 import {ListFormModalComponent} from "../../base/list-form-modal/list-form-modal.component";
 import {ExportModalComponent} from "../../base/export-modal/export-modal.component";
+import {ImportModalComponent} from "../../base/import-modal/import-modal.component";
 
 @Component({
   selector: 'app-list-detail',
@@ -59,6 +60,11 @@ export class ListDetailComponent implements OnInit {
 
   openExportModal() {
     const modalRef = this.modalService.open(ExportModalComponent)
+    modalRef.componentInstance.listId = this.favoriteList.id
+  }
+
+  openImportModal() {
+    const modalRef = this.modalService.open(ImportModalComponent)
     modalRef.componentInstance.listId = this.favoriteList.id
   }
 

@@ -24,9 +24,10 @@ import { AreYouSureModalComponent } from './elitefour/base/are-you-sure-modal/ar
 import { AlgorithmComponent } from './elitefour/pages/algorithm/algorithm.component';
 import { HelpComponent } from './elitefour/pages/help/help.component';
 import { ExportModalComponent } from './elitefour/base/export-modal/export-modal.component';
+import { ImportModalComponent } from './elitefour/base/import-modal/import-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, ListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent, AlgorithmComponent, HelpComponent, ExportModalComponent],
+  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, ListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent, AlgorithmComponent, HelpComponent, ExportModalComponent, ImportModalComponent],
   imports: [
     BrowserModule,
     FormsModule,
