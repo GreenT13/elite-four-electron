@@ -38,7 +38,11 @@ function createWindow(): BrowserWindow {
       protocol: 'file:',
       slashes: true
     }));
+
+    win.setMenu(null)
   }
+
+  win.maximize()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
