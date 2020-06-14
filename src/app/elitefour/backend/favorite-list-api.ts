@@ -82,6 +82,10 @@ export class FavoriteListApi implements IFavoriteListApi {
   }
 
   addItemToFavoriteList(listId: number, itemName: string) {
+    if (!itemName) {
+      throw new Error('You must set a name')
+    }
+
     const favoriteList: FavoriteList = this.findListById(listId);
     const itemExists: boolean = !!favoriteList.items.find(item => item.name == itemName)
 

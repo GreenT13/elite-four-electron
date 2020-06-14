@@ -15,6 +15,5 @@
   Add buttons with <i class="fas fa-th"></i> and <i class="fas fa-bars"></i> or <i class="fas fa-th-list"></i>. You get the jist.
 
 == Concrete small actions ==
-8. Make it impossible to add an item with no name (for list this is fixed).
 9. Create a reset-algorithm button.
 10. Create a remove-all items button.
