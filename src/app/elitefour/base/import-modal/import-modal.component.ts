@@ -36,7 +36,7 @@ export class ImportModalComponent implements OnInit {
   @Input() listId: number;
   private favoriteList: FavoriteList
   private fs: any;
-  private itemsToUpload: string[] = [];
+  itemsToUpload: string[] = [];
   fileName: string = ''
   error: string;
 

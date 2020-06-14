@@ -9,13 +9,13 @@ import {FavoriteItem, FavoriteList, FavoriteListStatus} from "../../backend/favo
   styleUrls: ['./algorithm.component.css']
 })
 export class AlgorithmComponent implements OnInit {
-  private favoriteList: FavoriteList
+  favoriteList: FavoriteList
   toBeChosenItems: FavoriteItem[]
   private selectedItems: FavoriteItem[]
   newFavorites: FavoriteItem[] = []
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
+              public router: Router,
               private favoriteItemApi: FavoriteItemApi) {
   }
 
