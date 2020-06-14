@@ -13,6 +13,3 @@
 - Filtering on items (either by user or use some sensible default like first all favorites, then alphabetically)
 - Choose between showing the cards in blocks or in lines (if names are small and you have a big screen, this is more efficient).
   Add buttons with <i class="fas fa-th"></i> and <i class="fas fa-bars"></i> or <i class="fas fa-th-list"></i>. You get the jist.
-
-== Concrete small actions ==
-10. Create a remove-all items button.

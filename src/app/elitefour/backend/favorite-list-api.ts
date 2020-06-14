@@ -141,5 +141,10 @@ export class FavoriteListApi implements IFavoriteListApi {
     this.save()
   }
 
+  removeAllItems(listId: number) {
+    const favoriteList: FavoriteList = this.findListById(listId);
+    favoriteList.items = []
+    this.save()
+  }
 }
 

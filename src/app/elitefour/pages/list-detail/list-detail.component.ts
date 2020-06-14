@@ -87,5 +87,13 @@ export class ListDetailComponent implements OnInit {
         this.favoriteListApi.resetAlgorithm(this.favoriteList.id);
       }}, () => {})
   }
+
+  removeAllItems() {
+    const modalRef = this.modalService.open(AreYouSureModalComponent)
+    modalRef.result.then((result) => {
+      if (result) {
+        this.favoriteListApi.removeAllItems(this.favoriteList.id);
+      }}, () => {})
+  }
 }
 
