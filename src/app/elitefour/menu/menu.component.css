@@ -2,6 +2,12 @@ nav {
   background-color: #0D1B3E
 }
 
+@media (min-width: 1220px) {
+  nav {
+    padding-left: calc(100vw - 100%) !important;
+  }
+}
+
 .content {
   height: 40px;
   width: 100%;
@@ -12,7 +18,6 @@ nav {
 .list-group {
   display: inline-block;
   width: 100%;
-  max-width: 1200px;
 }
 
 .list-group-item {

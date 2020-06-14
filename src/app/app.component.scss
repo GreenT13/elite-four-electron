@@ -4,3 +4,9 @@
   padding: 20px 40px;
   max-width: 1200px;
 }
+
+@media (min-width: 1220px) {
+  .wrapper {
+    padding-left: calc(100vw - 100%);
+  }
+}
