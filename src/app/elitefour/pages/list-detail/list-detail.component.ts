@@ -58,5 +58,24 @@ export class ListDetailComponent implements OnInit {
       }}, () => {})
   }
 
+  sortByFavoriteThenId(favoriteItems: FavoriteItem[]) {
+    return favoriteItems.sort((a, b) => {
+      // If both are favorites already, sort them by favorite.
+      if (!!a.favoritePosition && !!b.favoritePosition) {
+        return a.favoritePosition - b.favoritePosition;
+      }
+
+      // The item with a favorite is always larger.
+      if (!!a.favoritePosition && !b.favoritePosition) {
+        return -1;
+      } else if (!a.favoritePosition && !!b.favoritePosition) {
+        return 1;
+      }
+
+      // If neither is a favorite, sort by id.
+      return a.id - b.id
+    });
+  }
+
 }
 
