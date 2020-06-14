@@ -31,5 +31,5 @@ export type IFavoriteListApi = {
   deleteItemFromFavoriteList(listId: number, itemId: number)
   setStatus(listId: number, status: FavoriteListStatus)
   setFavoritePosition(listId: number, itemId: number, position: number)
-  saveList(favoriteList: FavoriteList)
+  updateList(favoriteList: FavoriteList)
 }

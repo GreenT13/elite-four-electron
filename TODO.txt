@@ -3,7 +3,6 @@
 - Export
 
 == UX things ==
-- Popup for editing list details
 - Clicking on list/item card defaults to info/edit
 - Some kind of help/doc page explaining what it is and how to use it?
 - Hover popup (popover?) indicating some help text.

@@ -16,7 +16,7 @@ import { HeaderComponent } from './elitefour/base/header/header.component';
 import { HeaderButtonComponent } from './elitefour/base/header-button/header-button.component';
 import { ListDetailComponent } from './elitefour/pages/list-detail/list-detail.component';
 import { ListOverviewComponent } from './elitefour/pages/list-overview/list-overview.component';
-import { AddListFormModalComponent } from './elitefour/base/add-list-form-modal/add-list-form-modal.component';
+import { ListFormModalComponent } from './elitefour/base/list-form-modal/list-form-modal.component';
 import { SettingsComponent } from './elitefour/pages/settings/settings.component';
 import { MenuComponent } from './elitefour/menu/menu.component';
 import { ItemFormModalComponent } from './elitefour/base/item-form-modal/item-form-modal.component';
@@ -25,7 +25,7 @@ import { AlgorithmComponent } from './elitefour/pages/algorithm/algorithm.compon
 import { HelpComponent } from './elitefour/pages/help/help.component';
 
 @NgModule({
-  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, AddListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent, AlgorithmComponent, HelpComponent],
+  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, ListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent, AlgorithmComponent, HelpComponent],
   imports: [
     BrowserModule,
     FormsModule,

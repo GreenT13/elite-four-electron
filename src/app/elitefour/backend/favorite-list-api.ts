@@ -33,7 +33,7 @@ export class FavoriteListApi implements IFavoriteListApi {
 
 
 
-  saveList(favoriteList: FavoriteList) {
+  updateList(favoriteList: FavoriteList) {
     const favoriteListInlist: FavoriteList = this.favoriteLists.find(list => list.id == favoriteList.id)
 
     if(!favoriteListInlist) {
@@ -59,10 +59,6 @@ export class FavoriteListApi implements IFavoriteListApi {
   }
 
   addNewFavoriteList(listName: string) {
-    if (!listName) {
-      throw new Error('You must set a name')
-    }
-
     const nameExists: boolean = !!this.favoriteLists.find(favoriteList => favoriteList.name == listName);
 
     if (nameExists) {
@@ -82,10 +78,6 @@ export class FavoriteListApi implements IFavoriteListApi {
   }
 
   addItemToFavoriteList(listId: number, itemName: string) {
-    if (!itemName) {
-      throw new Error('You must set a name')
-    }
-
     const favoriteList: FavoriteList = this.findListById(listId);
     const itemExists: boolean = !!favoriteList.items.find(item => item.name == itemName)
 

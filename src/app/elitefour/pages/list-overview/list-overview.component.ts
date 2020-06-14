@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AddListFormModalComponent} from "../../base/add-list-form-modal/add-list-form-modal.component";
+import {ListFormModalComponent} from "../../base/list-form-modal/list-form-modal.component";
 import {FavoriteListApi} from "../../backend/favorite-list-api";
 import {FavoriteList} from "../../backend/favorite-list-interfaces";
 import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-sure-modal.component";
@@ -36,7 +36,7 @@ export class ListOverviewComponent implements OnInit {
   }
 
   openAddNewListModal() {
-    this.modalService.open(AddListFormModalComponent);
+    this.modalService.open(ListFormModalComponent);
   }
 
   deleteList(listId: number) {

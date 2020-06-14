@@ -8,7 +8,8 @@ import {FavoriteItem} from "../../backend/favorite-list-interfaces";
   template: `
     <form (ngSubmit)="onSubmit()">
       <div class="modal-header">
-        <h4 class="modal-title">Add a new item</h4>
+        <h4 class="modal-title" *ngIf="!isEditMode">Add a new item</h4>
+        <h4 class="modal-title" *ngIf="isEditMode">Edit item</h4>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -41,6 +42,11 @@ export class ItemFormModalComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.itemName.length == 0) {
+      this.error = 'You must set a name'
+      return false;
+    }
+
     try {
       if (this.isEditMode) {
         // Create a new item so that in case the update goes wrong we didn't update the incoming item (which is shown on the screen).

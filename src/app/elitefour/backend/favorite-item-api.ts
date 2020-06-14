@@ -43,7 +43,7 @@ export class FavoriteItemApi {
   }
 
   private save() {
-    this.favoriteListApi.saveList(this.favoriteList);
+    this.favoriteListApi.updateList(this.favoriteList);
     this.favoriteListSubject.next(this.favoriteList);
   }
 
