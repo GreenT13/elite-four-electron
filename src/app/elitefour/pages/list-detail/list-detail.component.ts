@@ -6,6 +6,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ItemFormModalComponent} from "../../base/item-form-modal/item-form-modal.component";
 import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-sure-modal.component";
 import {ListFormModalComponent} from "../../base/list-form-modal/list-form-modal.component";
+import {ExportModalComponent} from "../../base/export-modal/export-modal.component";
 
 @Component({
   selector: 'app-list-detail',
@@ -56,6 +57,11 @@ export class ListDetailComponent implements OnInit {
     modalRef.componentInstance.favoriteList = this.favoriteList
   }
 
+  openExportModal() {
+    const modalRef = this.modalService.open(ExportModalComponent)
+    modalRef.componentInstance.listId = this.favoriteList.id
+  }
+
   deleteItem(itemId: number) {
     const modalRef = this.modalService.open(AreYouSureModalComponent)
     modalRef.result.then((result) => {
@@ -65,22 +71,7 @@ export class ListDetailComponent implements OnInit {
   }
 
   sortByFavoriteThenId(favoriteItems: FavoriteItem[]) {
-    return favoriteItems.sort((a, b) => {
-      // If both are favorites already, sort them by favorite.
-      if (!!a.favoritePosition && !!b.favoritePosition) {
-        return a.favoritePosition - b.favoritePosition;
-      }
-
-      // The item with a favorite is always larger.
-      if (!!a.favoritePosition && !b.favoritePosition) {
-        return -1;
-      } else if (!a.favoritePosition && !!b.favoritePosition) {
-        return 1;
-      }
-
-      // If neither is a favorite, sort by id.
-      return a.id - b.id
-    });
+    return ExportModalComponent.sortItems(favoriteItems);
   }
 
   resetAlgorithm() {

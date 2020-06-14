@@ -1,6 +1,5 @@
 == File stuff ==
 - Import
-- Export
 
 == UX things ==
 - Something to show setting details (path where stuff is stored, version, things like that)
