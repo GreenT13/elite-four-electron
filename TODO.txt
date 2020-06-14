@@ -15,9 +15,6 @@
   Add buttons with <i class="fas fa-th"></i> and <i class="fas fa-bars"></i> or <i class="fas fa-th-list"></i>. You get the jist.
 
 == Concrete small actions ==
-5. Give finished, ongoing and created a color on the screens.
-6. Make a nice badge for the favorite number if position is determined.
-7. Add sorting on items: first on favorite, then by id.
 8. Make it impossible to add an item with no name (for list this is fixed).
 9. Create a reset-algorithm button.
 10. Create a remove-all items button.
