@@ -16,7 +16,7 @@ import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-su
     <app-card-list *ngFor="let favoriteList of favoriteLists"
                    [title]="favoriteList.name"
                    [subtext]="favoriteList.status" (onDelete)="deleteList(favoriteList.id)"
-                   (onPlay)="log()" (onInfo)="navigateToList(favoriteList.id)"></app-card-list>
+                   (onInfo)="navigateToList(favoriteList.id)"></app-card-list>
   `,
   styles: []
 })

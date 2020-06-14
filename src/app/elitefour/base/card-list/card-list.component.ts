@@ -11,8 +11,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
                         <div *ngIf="subtext" class="mr-3">{{subtext}}</div>
                         <button *ngIf="isDeleteUsed" (click)="onDelete.emit()"
                                 class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></button>
-                        <button *ngIf="isPlayUsed" (click)="onPlay.emit()"
-                                class="btn btn-secondary ml-2"><i class="fas fa-play"></i></button>
                         <button *ngIf="isInfoUsed" (click)="onInfo.emit()"
                                 class="btn btn-primary ml-2"><i class="fas fa-info"></i></button>
                         <button *ngIf="isEditUsed" (click)="onEdit.emit()"
@@ -36,8 +34,6 @@ export class CardListComponent implements OnInit {
 
   @Output() onDelete?: EventEmitter<null> = new EventEmitter();
   isDeleteUsed: boolean
-  @Output() onPlay?: EventEmitter<null> = new EventEmitter();
-  isPlayUsed: boolean
   @Output() onInfo?: EventEmitter<null> = new EventEmitter();
   isInfoUsed: boolean
   @Output() onEdit?: EventEmitter<null> = new EventEmitter();
@@ -48,7 +44,6 @@ export class CardListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isDeleteUsed = this.onDelete.observers.length > 0;
-    this.isPlayUsed = this.onPlay.observers.length > 0;
     this.isInfoUsed = this.onInfo.observers.length > 0;
     this.isEditUsed = this.onEdit.observers.length > 0;
   }
