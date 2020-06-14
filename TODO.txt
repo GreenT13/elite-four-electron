@@ -3,11 +3,10 @@
 - Export
 
 == UX things ==
-- Some kind of help/doc page explaining what it is and how to use it?
 - Hover popup (popover?) indicating some help text.
 - Something to show setting details (path where stuff is stored, version, things like that)
 - Make it possible to use keyboard inputs
 - Dark theme??? Either configurable or just only dark mode.
-- Filtering on items (either by user or use some sensible default like first all favorites, then alphabetically)
+- Filtering on items (something like control+F?)
 - Choose between showing the cards in blocks or in lines (if names are small and you have a big screen, this is more efficient).
   Add buttons with <i class="fas fa-th"></i> and <i class="fas fa-bars"></i> or <i class="fas fa-th-list"></i>. You get the jist.
