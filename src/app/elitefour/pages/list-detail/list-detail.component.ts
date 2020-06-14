@@ -22,10 +22,6 @@ export class ListDetailComponent implements OnInit {
 
   favoriteList: FavoriteList = {id: 0, name: '', status: undefined, tsCreated: new Date(), items: []}
 
-  log(x) {
-    console.log('A callback is for button ' + x);
-  }
-
   constructor(private route: ActivatedRoute,
               private router: Router,
               private favoriteListApi: FavoriteListApi,
@@ -66,6 +62,15 @@ export class ListDetailComponent implements OnInit {
   openImportModal() {
     const modalRef = this.modalService.open(ImportModalComponent)
     modalRef.componentInstance.listId = this.favoriteList.id
+  }
+
+  deleteList() {
+    const modalRef = this.modalService.open(AreYouSureModalComponent)
+    modalRef.result.then((result) => {
+      if (result) {
+        this.favoriteListApi.deleteFavoriteList(this.favoriteList.id);
+        this.router.navigate(['/list'])
+      }}, () => {})
   }
 
   deleteItem(itemId: number) {
