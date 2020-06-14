@@ -44,8 +44,8 @@
 </div>
 
 <app-content-header title="Items">
-  <app-content-header-button (click)="this.openItemModal(undefined)">New item</app-content-header-button>
-  <app-content-header-button (click)="log('Import')">Import</app-content-header-button>
+  <app-content-header-button *ngIf="favoriteList.status == CREATED" (click)="this.openItemModal(undefined)">New item</app-content-header-button>
+  <app-content-header-button *ngIf="favoriteList.status == CREATED" (click)="log('Import')">Import</app-content-header-button>
   <app-content-header-button (click)="log('Export')">Export</app-content-header-button>
 </app-content-header>
 
