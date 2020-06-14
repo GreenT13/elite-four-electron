@@ -15,8 +15,8 @@ import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-su
 
     <app-card-list *ngFor="let favoriteList of favoriteLists"
                    [title]="favoriteList.name"
-                   [subtext]="favoriteList.status" (onDelete)="deleteList(favoriteList.id)"
-                   (onInfo)="navigateToList(favoriteList.id)"></app-card-list>
+                   (onDelete)="deleteList(favoriteList.id)"
+                   (onInfo)="navigateToList(favoriteList.id)">{{favoriteList.status}}</app-card-list>
   `,
   styles: []
 })
@@ -44,7 +44,9 @@ export class ListOverviewComponent implements OnInit {
     modalRef.result.then((result) => {
       if (result) {
         this.favoriteListApi.deleteFavoriteList(listId)
-      }}, () => {})
+      }
+    }, () => {
+    })
   }
 
   log() {

@@ -8,7 +8,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
                 <div class="justify-content-between d-flex align-items-center">
                     <p class="p-0 m-0">{{title}}</p>
                     <div class="d-flex align-items-center">
-                        <div *ngIf="subtext" class="mr-3">{{subtext}}</div>
+                        <div class="mr-3">
+                          <ng-content></ng-content>
+                        </div>
                         <button *ngIf="isDeleteUsed" (click)="onDelete.emit()"
                                 class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></button>
                         <button *ngIf="isInfoUsed" (click)="onInfo.emit()"
@@ -29,7 +31,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class CardListComponent implements OnInit {
   @Input() title: string
-  @Input() subtext?: string
   @Input() addBottomMargin: boolean = true
 
   @Output() onDelete?: EventEmitter<null> = new EventEmitter();

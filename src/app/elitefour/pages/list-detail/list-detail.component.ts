@@ -13,8 +13,9 @@ import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-su
 })
 export class ListDetailComponent implements OnInit {
   // A field has to be created, otherwise it cannot be used in the HTML template.
-  readonly FINISHED = FavoriteListStatus.FINISHED;
-  readonly ONGOING = FavoriteListStatus.ONGOING;
+  readonly CREATED = FavoriteListStatus.CREATED
+  readonly ONGOING = FavoriteListStatus.ONGOING
+  readonly FINISHED = FavoriteListStatus.FINISHED
 
   favoriteList: FavoriteList = {id: 0, name: '', status: undefined, tsCreated: new Date(), items: []}
 
@@ -58,3 +59,4 @@ export class ListDetailComponent implements OnInit {
   }
 
 }
+
