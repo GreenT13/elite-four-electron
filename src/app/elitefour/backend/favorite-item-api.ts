@@ -10,7 +10,6 @@ import {Observable, ReplaySubject} from "rxjs";
   providedIn: 'root'
 })
 export class FavoriteItemApi {
-  private readonly nrOfItemsToBeShownOnScreen = 3;
   private favoriteList: FavoriteList
   private favoriteListSubject: ReplaySubject<FavoriteList>;
 
@@ -88,7 +87,7 @@ export class FavoriteItemApi {
     }
 
     // Pick n items of this list (or less if there are not that many items left).
-    const toBeChosenItems = this.getItemsThatCanBeChosen(this.nrOfItemsToBeShownOnScreen);
+    const toBeChosenItems = this.getItemsThatCanBeChosen(this.favoriteList.nrOfItemsToBeShownOnScreen);
 
     // Mark all items in the list.
     toBeChosenItems.forEach((item) => {
@@ -147,7 +146,7 @@ export class FavoriteItemApi {
    * Returns the position that was picked. If no item was picked as a new favorite, 0 is returned.
    */
   private pickFavoritesIfPossible(): FavoriteItem {
-    const toBeChosenItemsNextTime = this.getItemsThatCanBeChosen(this.nrOfItemsToBeShownOnScreen);
+    const toBeChosenItemsNextTime = this.getItemsThatCanBeChosen(this.favoriteList.nrOfItemsToBeShownOnScreen);
 
     // If more than one element is still available, we just continue.
     if (toBeChosenItemsNextTime.length > 1) {

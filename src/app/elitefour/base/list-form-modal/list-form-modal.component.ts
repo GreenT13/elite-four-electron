@@ -16,9 +16,14 @@ import {FavoriteList} from "../../backend/favorite-list-interfaces";
       </div>
       <div class="modal-body">
         <div class="form-group">
+          <label for="listName">List name</label>
           <!--suppress HtmlUnknownAttribute -->
           <input ngbAutofocus type="text" class="form-control" id="listName" [(ngModel)]="listName" name="listName">
           <div class="alert alert-danger" *ngIf="!!error">{{error}}</div>
+        </div>
+        <div class="form-group">
+          <label for="nrOfItemsToBeShownOnScreen">Maximal number of items to show on screen</label>
+          <input type="number" class="form-control" id="nrOfItemsToBeShownOnScreen" [(ngModel)]="nrOfItemsToBeShownOnScreen" name="nrOfItemsToBeShownOnScreen">
         </div>
       </div>
       <div class="modal-footer">
@@ -33,6 +38,8 @@ import {FavoriteList} from "../../backend/favorite-list-interfaces";
 export class ListFormModalComponent implements OnInit {
   @Input() favoriteList: FavoriteList
   listName: string = ''
+  nrOfItemsToBeShownOnScreen: number = 20
+
   error: string
   isEditMode: boolean
 
@@ -54,10 +61,11 @@ export class ListFormModalComponent implements OnInit {
           name: this.listName,
           items: this.favoriteList.items,
           status: this.favoriteList.status,
-          tsCreated: this.favoriteList.tsCreated
+          tsCreated: this.favoriteList.tsCreated,
+          nrOfItemsToBeShownOnScreen: this.nrOfItemsToBeShownOnScreen
         })
       } else {
-        this.favoriteListApi.addNewFavoriteList(this.listName);
+        this.favoriteListApi.addNewFavoriteList(this.listName, this.nrOfItemsToBeShownOnScreen);
       }
     } catch (error) {
       this.error = error.message;
@@ -72,6 +80,7 @@ export class ListFormModalComponent implements OnInit {
 
     if (this.isEditMode) {
       this.listName = this.favoriteList.name
+      this.nrOfItemsToBeShownOnScreen = this.favoriteList.nrOfItemsToBeShownOnScreen
     }
   }
 }

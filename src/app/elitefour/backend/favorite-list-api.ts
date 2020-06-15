@@ -1,4 +1,4 @@
-import {FavoriteItem, FavoriteList, FavoriteListStatus, IFavoriteListApi} from "./favorite-list-interfaces";
+import {FavoriteItem, FavoriteList, FavoriteListStatus} from "./favorite-list-interfaces";
 import {FavoriteListDatabase} from "./favorite-list-database";
 import {Observable, ReplaySubject} from "rxjs";
 import {Injectable} from "@angular/core";
@@ -6,7 +6,7 @@ import {Injectable} from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-export class FavoriteListApi implements IFavoriteListApi {
+export class FavoriteListApi {
   // Whenever this list is modified, it should be updated on disk.
   private readonly favoriteLists: FavoriteList[];
   private readonly favoriteListsSubject: ReplaySubject<FavoriteList[]>;
@@ -58,14 +58,14 @@ export class FavoriteListApi implements IFavoriteListApi {
     })
   }
 
-  addNewFavoriteList(listName: string) {
+  addNewFavoriteList(listName: string, nrOfItemsToBeShownOnScreen: number) {
     const nameExists: boolean = !!this.favoriteLists.find(favoriteList => favoriteList.name == listName);
 
     if (nameExists) {
       throw new Error('List with the same name already exists');
     }
 
-    const favoriteList: FavoriteList = this.favoriteListDatabase.createNewList(listName);
+    const favoriteList: FavoriteList = this.favoriteListDatabase.createNewList(listName, nrOfItemsToBeShownOnScreen);
 
     this.favoriteLists.push(favoriteList)
     this.save();
@@ -107,18 +107,6 @@ export class FavoriteListApi implements IFavoriteListApi {
     const favoriteItem: FavoriteItem = this.findItemById(listId, itemId);
     items.splice(items.indexOf(favoriteItem), 1)
     this.save()
-  }
-
-  setFavoritePosition(listId: number, itemId: number, position: number) {
-    const favoriteItem: FavoriteItem = this.findItemById(listId, itemId);
-    favoriteItem.favoritePosition = position;
-    this.save();
-  }
-
-  setStatus(listId: number, status: FavoriteListStatus) {
-    const favoriteList: FavoriteList = this.findListById(listId);
-    favoriteList.status = status;
-    this.save();
   }
 
   resetAlgorithm(listId: number) {

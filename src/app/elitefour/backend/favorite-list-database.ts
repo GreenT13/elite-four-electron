@@ -34,8 +34,8 @@ export class FavoriteListDatabase {
     return this.store.get('favoriteLists');
   }
 
-  createNewList(listName: string): FavoriteList {
-    return {id: this.generateListId(), name: listName, status: FavoriteListStatus.CREATED, tsCreated: new Date(), items: []}
+  createNewList(listName: string, nrOfItemsToBeShownOnScreen: number): FavoriteList {
+    return {id: this.generateListId(), name: listName, status: FavoriteListStatus.CREATED, tsCreated: new Date(), items: [], nrOfItemsToBeShownOnScreen: nrOfItemsToBeShownOnScreen}
   }
 
   createNewItem(favoriteList: FavoriteList, itemName: string): FavoriteItem {

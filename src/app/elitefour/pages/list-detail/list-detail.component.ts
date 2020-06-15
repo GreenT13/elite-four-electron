@@ -20,7 +20,7 @@ export class ListDetailComponent implements OnInit {
   readonly ONGOING = FavoriteListStatus.ONGOING
   readonly FINISHED = FavoriteListStatus.FINISHED
 
-  favoriteList: FavoriteList = {id: 0, name: '', status: undefined, tsCreated: new Date(), items: []}
+  favoriteList: FavoriteList = {id: 0, name: '', status: undefined, tsCreated: new Date(), items: [], nrOfItemsToBeShownOnScreen: 20}
 
   constructor(private route: ActivatedRoute,
               private router: Router,
