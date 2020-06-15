@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FavoriteListApi} from "../../backend/favorite-list-api";
-import {FavoriteList} from "../../backend/favorite-list-interfaces";
+import {FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-interfaces";
 
 @Component({
   selector: 'app-add-list-form',
@@ -23,7 +23,8 @@ import {FavoriteList} from "../../backend/favorite-list-interfaces";
         </div>
         <div class="form-group">
           <label for="nrOfItemsToBeShownOnScreen">Maximal number of items to show on screen</label>
-          <input type="number" class="form-control" id="nrOfItemsToBeShownOnScreen" [(ngModel)]="nrOfItemsToBeShownOnScreen" name="nrOfItemsToBeShownOnScreen">
+          <input type="number" class="form-control" id="nrOfItemsToBeShownOnScreen" [(ngModel)]="nrOfItemsToBeShownOnScreen" name="nrOfItemsToBeShownOnScreen"
+          [disabled]="isNrOfItemsToBeShownOnScreensDisabled()">
         </div>
       </div>
       <div class="modal-footer">
@@ -45,6 +46,15 @@ export class ListFormModalComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal,
               private favoriteListApi: FavoriteListApi) {
+  }
+
+  isNrOfItemsToBeShownOnScreensDisabled() {
+    // If the list is ongoing, we cannot change the configuration.
+    if (!!this.favoriteList) {
+      return this.favoriteList.status != FavoriteListStatus.CREATED
+    }
+
+    return false;
   }
 
   onSubmit() {
