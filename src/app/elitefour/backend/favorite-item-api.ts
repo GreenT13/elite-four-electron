@@ -27,11 +27,30 @@ export class FavoriteItemApi {
     this.favoriteListSubject.next(this.favoriteList)
   }
 
-  private getItemsThatCanBeChosen(): FavoriteItem[] {
+  private getItemsThatCanBeChosen(nrOfItemsToBeShownOnScreen: number): FavoriteItem[] {
     // Any item that is not eliminated or already a favorite can be chosen.
-    return this.favoriteList.items.filter((item) => {
-      return item.eliminatedBy.length == 0 && !item.favoritePosition
-    })
+    const possibleItemSelection = this.favoriteList.items.filter((item) => item.eliminatedBy.length == 0 && !item.favoritePosition)
+
+    // To sort properly, we need to count the number of items that the item eliminated.
+    // To make the amount of calculations predictable, we don't do this inside the sort, but create a map in memory.
+    const nrOfEliminated = new Map<number, number>()
+    possibleItemSelection.forEach((item) => nrOfEliminated.set(item.id,
+      this.favoriteList.items.filter((eliminatedItem) => eliminatedItem.eliminatedBy.includes(item.id)).length))
+
+    return possibleItemSelection
+      // Sort all items in blocks based on the number of eliminated items.
+      // However, also randomize all the elements inside the blocks.
+      .sort((a, b) => {
+        const aNrOfEliminatedItems = nrOfEliminated.get(a.id)
+        const bNrOfEliminatedItems = nrOfEliminated.get(b.id)
+        if (aNrOfEliminatedItems == bNrOfEliminatedItems) {
+          return 0.5 - Math.random();
+        } else {
+          return aNrOfEliminatedItems - bNrOfEliminatedItems
+        }
+      })
+      // Now pick the total amount of needed items.
+      .slice(0, nrOfItemsToBeShownOnScreen)
   }
 
   private getToBeChosenItems(): FavoriteItem[] {
@@ -68,14 +87,13 @@ export class FavoriteItemApi {
       throw new Error('Cannot execute algorithm for a finished list.')
     }
 
-    // Get a shuffled list of items to be chosen.
-    const itemsToBeChosen = this.getItemsThatCanBeChosen().sort(() => 0.5 - Math.random());
-
     // Pick n items of this list (or less if there are not that many items left).
-    const toBeChosenItems = itemsToBeChosen.slice(0, Math.min(this.nrOfItemsToBeShownOnScreen, itemsToBeChosen.length));
+    const toBeChosenItems = this.getItemsThatCanBeChosen(this.nrOfItemsToBeShownOnScreen);
 
     // Mark all items in the list.
-    toBeChosenItems.forEach((item) => {item.toBeChosen = true})
+    toBeChosenItems.forEach((item) => {
+      item.toBeChosen = true
+    })
 
     this.save();
     return toBeChosenItems
@@ -129,7 +147,7 @@ export class FavoriteItemApi {
    * Returns the position that was picked. If no item was picked as a new favorite, 0 is returned.
    */
   private pickFavoritesIfPossible(): FavoriteItem {
-    const toBeChosenItemsNextTime = this.getItemsThatCanBeChosen();
+    const toBeChosenItemsNextTime = this.getItemsThatCanBeChosen(this.nrOfItemsToBeShownOnScreen);
 
     // If more than one element is still available, we just continue.
     if (toBeChosenItemsNextTime.length > 1) {
