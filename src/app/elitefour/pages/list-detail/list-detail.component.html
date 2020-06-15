@@ -1,7 +1,7 @@
 <app-content-header title="{{favoriteList.name}}" (onEdit)="openListModal()">
   <app-content-header-button btnClass="btn-danger" (click)="deleteList()">Delete</app-content-header-button>
   <app-content-header-button *ngIf="favoriteList.status != FINISHED"
-                             btnClass="btn-success"
+                             btnClass="btn-primary"
                              (click)="router.navigate(['/list/' + favoriteList.id + '/algorithm']);"
                              [disabled]="favoriteList.items.length <= 1">
     {{favoriteList.status == ONGOING ? 'Resume' : 'Start' }}
