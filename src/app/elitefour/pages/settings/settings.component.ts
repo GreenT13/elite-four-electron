@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { version } from '../../../../../package.json';
+import { author } from '../../../../../package.json';
 
 @Component({
   selector: 'app-settings',
@@ -8,6 +9,7 @@ import { version } from '../../../../../package.json';
 })
 export class SettingsComponent implements OnInit {
   version: string = version;
+  authorName = author.name
   configPath: string = ''
 
   constructor() { }
