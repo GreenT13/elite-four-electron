@@ -3,31 +3,31 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-card-list',
   template: `
-        <div class="card" [ngClass]="addBottomMargin ? 'mb-4' : ''">
-            <div class="card-body">
-                <div class="justify-content-between d-flex align-items-center">
-                    <p class="p-0 m-0">{{title}}</p>
-                    <div class="d-flex align-items-center">
-                        <div class="mr-3">
-                          <ng-content></ng-content>
-                        </div>
-                        <button *ngIf="isDeleteUsed" (click)="onDelete.emit()"
-                                class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></button>
-                        <button *ngIf="isInfoUsed" (click)="onInfo.emit()"
-                                class="btn btn-primary ml-2"><i class="fas fa-info"></i></button>
-                        <button *ngIf="isEditUsed" (click)="onEdit.emit()"
-                                class="btn btn-primary ml-2"><i class="fas fa-edit"></i></button>
-                    </div>
-                </div>
+    <div class="card" [ngClass]="addBottomMargin ? 'mb-4' : ''">
+      <div class="card-body">
+        <div class="justify-content-between d-flex align-items-center">
+          <p class="p-0 m-0">{{title}}</p>
+          <div class="d-flex align-items-center">
+            <div class="mr-3">
+              <ng-content></ng-content>
             </div>
+            <button *ngIf="isDeleteUsed" (click)="onDelete.emit()"
+                    class="btn btn-danger ml-2"><i class="fas fa-trash-alt"></i></button>
+            <button *ngIf="isInfoUsed" (click)="onInfo.emit()"
+                    class="btn btn-primary ml-2"><i class="fas fa-info"></i></button>
+            <button *ngIf="isEditUsed" (click)="onEdit.emit()"
+                    class="btn btn-primary ml-2"><i class="fas fa-edit"></i></button>
+          </div>
         </div>
-    `,
+      </div>
+    </div>
+  `,
   styles: [`
-        button {
-            width: 40px;
-            height: 40px;
-        }
-    `]
+    button {
+      width: 40px;
+      height: 40px;
+    }
+  `]
 })
 export class CardListComponent implements OnInit {
   @Input() title: string
