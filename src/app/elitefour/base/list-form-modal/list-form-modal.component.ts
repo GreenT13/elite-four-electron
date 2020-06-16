@@ -6,7 +6,7 @@ import {FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-inte
 @Component({
   selector: 'app-add-list-form',
   template: `
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" [appForbiddenListName]="['listName', 'initialListName']">
       <div class="modal-header">
         <h4 class="modal-title" *ngIf="!isEditMode">Add a new list</h4>
         <h4 class="modal-title" *ngIf="isEditMode">Edit list</h4>
@@ -18,13 +18,21 @@ import {FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-inte
         <div class="form-group">
           <label for="listName">List name</label>
           <!--suppress HtmlUnknownAttribute -->
-          <input ngbAutofocus type="text" class="form-control" id="listName" [(ngModel)]="listName" name="listName">
-          <div class="alert alert-danger" *ngIf="!!error">{{error}}</div>
+          <input ngbAutofocus type="text" class="form-control" id="listName" #listNameModel="ngModel"
+                 [(ngModel)]="listName"
+                 name="listName" [ngClass]="{ 'is-invalid': f.submitted && listNameModel.invalid }" required>
+          <input type="hidden" [(ngModel)]="initialListName" #initialListNameModel="ngModel" id="initialListName"
+                 name="initialListName">
+          <div *ngIf="f.submitted && listNameModel.invalid" class="invalid-feedback">
+            <div *ngIf="listNameModel.errors.required">Name is required</div>
+            <div *ngIf="listNameModel.errors.forbiddenName">Name already exists</div>
+          </div>
         </div>
         <div class="form-group">
           <label for="nrOfItemsToBeShownOnScreen">Maximal number of items to show on screen</label>
-          <input type="number" class="form-control" id="nrOfItemsToBeShownOnScreen" [(ngModel)]="nrOfItemsToBeShownOnScreen" name="nrOfItemsToBeShownOnScreen"
-          [disabled]="isNrOfItemsToBeShownOnScreensDisabled()">
+          <input type="number" class="form-control" id="nrOfItemsToBeShownOnScreen"
+                 [(ngModel)]="nrOfItemsToBeShownOnScreen" name="nrOfItemsToBeShownOnScreen"
+                 [disabled]="isNrOfItemsToBeShownOnScreensDisabled()">
         </div>
       </div>
       <div class="modal-footer">
@@ -39,6 +47,7 @@ import {FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-inte
 export class ListFormModalComponent implements OnInit {
   @Input() favoriteList: FavoriteList
   listName: string = ''
+  initialListName: string = ''
   nrOfItemsToBeShownOnScreen: number = 20
 
   error: string
@@ -90,6 +99,7 @@ export class ListFormModalComponent implements OnInit {
 
     if (this.isEditMode) {
       this.listName = this.favoriteList.name
+      this.initialListName = this.listName
       this.nrOfItemsToBeShownOnScreen = this.favoriteList.nrOfItemsToBeShownOnScreen
     }
   }
