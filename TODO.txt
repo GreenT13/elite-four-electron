@@ -1,4 +1,6 @@
 == UX things ==
-- Something to show setting details (path where stuff is stored, version, things like that)
 - Make it possible to use keyboard inputs
 - Filtering on items (something like control+F?)
+
+== Concrete actions ==
+- Show nrOfItemsToBeShownOnScreen somewhere on the screen
