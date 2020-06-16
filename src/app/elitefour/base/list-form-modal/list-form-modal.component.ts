@@ -6,7 +6,7 @@ import {FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-inte
 @Component({
   selector: 'app-add-list-form',
   template: `
-    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" [appForbiddenListName]="['listName', 'initialListName']">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" [appForbiddenListName]="['listName', 'initialListName']" novalidate>
       <div class="modal-header">
         <h4 class="modal-title" *ngIf="!isEditMode">Add a new list</h4>
         <h4 class="modal-title" *ngIf="isEditMode">Edit list</h4>
@@ -32,7 +32,12 @@ import {FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-inte
           <label for="nrOfItemsToBeShownOnScreen">Maximal number of items to show on screen</label>
           <input type="number" class="form-control" id="nrOfItemsToBeShownOnScreen"
                  [(ngModel)]="nrOfItemsToBeShownOnScreen" name="nrOfItemsToBeShownOnScreen"
-                 [disabled]="isNrOfItemsToBeShownOnScreensDisabled()">
+                 [ngClass]="{ 'is-invalid': f.submitted && nrOfItemsToBeShownOnScreenModel.invalid }"
+                 [disabled]="isNrOfItemsToBeShownOnScreensDisabled()"
+                 #nrOfItemsToBeShownOnScreenModel="ngModel" customMin="2">
+          <div *ngIf="nrOfItemsToBeShownOnScreenModel.invalid" class="invalid-feedback">
+            <div *ngIf="nrOfItemsToBeShownOnScreenModel.errors.customMin">Should be at least 2</div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

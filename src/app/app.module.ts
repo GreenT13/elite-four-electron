@@ -26,9 +26,10 @@ import { HelpComponent } from './elitefour/pages/help/help.component';
 import { ExportModalComponent } from './elitefour/base/export-modal/export-modal.component';
 import { ImportModalComponent } from './elitefour/base/import-modal/import-modal.component';
 import { ForbiddenListNameValidatorDirective } from './elitefour/base/list-form-modal/forbidden-list-name-validator.directive';
+import { CustomMinValidatorDirective } from './elitefour/base/list-form-modal/custom-min-validator.directive';
 
 @NgModule({
-  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, ListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent, AlgorithmComponent, HelpComponent, ExportModalComponent, ImportModalComponent, ForbiddenListNameValidatorDirective],
+  declarations: [AppComponent, CardListComponent, HeaderComponent, HeaderButtonComponent, ListDetailComponent, ListOverviewComponent, ListFormModalComponent, SettingsComponent, MenuComponent, ItemFormModalComponent, AreYouSureModalComponent, AlgorithmComponent, HelpComponent, ExportModalComponent, ImportModalComponent, ForbiddenListNameValidatorDirective, CustomMinValidatorDirective],
   imports: [
     BrowserModule,
     FormsModule,
