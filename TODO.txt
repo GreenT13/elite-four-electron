@@ -1,5 +1,4 @@
 == UX things ==
-- Make it possible to use keyboard inputs
 - Filtering on items (something like control+F?)
 
 == Concrete actions ==

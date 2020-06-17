@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FavoriteItem, FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-interfaces";
 import {FavoriteListApi} from "../../backend/favorite-list-api";
@@ -8,13 +8,14 @@ import {AreYouSureModalComponent} from "../../base/are-you-sure-modal/are-you-su
 import {ListFormModalComponent} from "../../base/list-form-modal/list-form-modal.component";
 import {ExportModalComponent} from "../../base/export-modal/export-modal.component";
 import {ImportModalComponent} from "../../base/import-modal/import-modal.component";
+import {ShortcutInput} from "ng-keyboard-shortcuts";
 
 @Component({
   selector: 'app-list-detail',
   templateUrl: './list-detail.component.html',
   styles: []
 })
-export class ListDetailComponent implements OnInit {
+export class ListDetailComponent implements OnInit, AfterViewInit {
   // A field has to be created, otherwise it cannot be used in the HTML template.
   readonly CREATED = FavoriteListStatus.CREATED
   readonly ONGOING = FavoriteListStatus.ONGOING
@@ -27,6 +28,21 @@ export class ListDetailComponent implements OnInit {
               private favoriteListApi: FavoriteListApi,
               private modalService: NgbModal) {
   }
+
+
+  shortcuts: ShortcutInput[] = [];
+  ngAfterViewInit(): void {
+    this.shortcuts.push(
+      {
+        key: ["n"],
+        label: "New item",
+        description: "N",
+        command: () => this.openItemModal(undefined),
+        preventDefault: true
+      },
+    );
+  }
+
 
   ngOnInit(): void {
     const listId = +this.route.snapshot.paramMap.get('id');
