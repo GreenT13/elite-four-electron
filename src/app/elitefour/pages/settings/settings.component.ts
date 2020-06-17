@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { version } from '../../../../../package.json';
 import { author } from '../../../../../package.json';
+import {ElectronService} from "../../../core/services";
 
 @Component({
   selector: 'app-settings',
@@ -12,10 +13,13 @@ export class SettingsComponent implements OnInit {
   authorName = author.name
   configPath: string = ''
 
-  constructor() { }
+  constructor(private electronService: ElectronService) { }
 
   ngOnInit(): void {
     this.configPath = require('electron').remote.app.getPath('userData') + '\\config.json'
   }
 
+  showDevTools() {
+    this.electronService.ipcRenderer.send('open-devtools')
+  }
 }

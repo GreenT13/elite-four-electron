@@ -1,4 +1,4 @@
-import {app, BrowserWindow, screen} from 'electron';
+import {app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -18,7 +18,7 @@ function createWindow(): BrowserWindow {
     height: size.height,
     webPreferences: {
       nodeIntegration: true,
-      allowRunningInsecureContent: (serve) ? true : false,
+      allowRunningInsecureContent: (serve),
     },
   });
 
@@ -56,6 +56,13 @@ function createWindow(): BrowserWindow {
 }
 
 try {
+  ipcMain.on('open-devtools', () => {
+    if(!win.webContents.isDevToolsOpened()){
+      win.webContents.openDevTools()
+    } else {
+      win.webContents.closeDevTools()
+    }
+  })
 
   app.allowRendererProcessReuse = true;
 
