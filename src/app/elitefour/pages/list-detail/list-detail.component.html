@@ -17,11 +17,13 @@
         <div class="content-header-wrapper justify-content-between d-flex align-items-center">
           <p class="p-0 m-0">
             Total number of items<br/>
-            Number of favorites picked
+            Number of favorites picked<br />
+            Algorithm max number of items
           </p>
           <p class="p-0 m-0 text-right">
             {{favoriteList.items.length}}<br/>
-            {{this.determineNumberOfFavoriteItemsPicked()}}
+            {{this.determineNumberOfFavoriteItemsPicked()}}<br />
+            {{favoriteList.nrOfItemsToBeShownOnScreen}}
           </p>
         </div>
       </div>
@@ -33,11 +35,13 @@
         <div class="content-header-wrapper justify-content-between d-flex align-items-center">
           <p class="p-0 m-0">
             Timestamp created<br/>
-            Status
+            Status<br/>
+            &nbsp;
           </p>
           <p class="p-0 m-0 text-right">
             {{favoriteList.tsCreated | date: 'dd-MM-yy HH:mm'}}<br/>
-            {{favoriteList.status}}
+            {{favoriteList.status}}<br/>
+            &nbsp;
           </p>
         </div>
       </div>

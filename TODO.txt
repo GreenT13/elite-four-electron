@@ -1,2 +1,0 @@
-== Concrete actions ==
-- Show nrOfItemsToBeShownOnScreen somewhere on the screen
