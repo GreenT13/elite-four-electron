@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ListFormModalComponent} from "../../base/list-form-modal/list-form-modal.component";
@@ -11,12 +11,17 @@ import {ShortcutInput} from "ng-keyboard-shortcuts";
   selector: 'app-list-overview',
   template: `
     <app-content-header title="Lists">
-      <app-content-header-button (click)="openAddNewListModal()"><u>N</u>ew</app-content-header-button>
+      <div class="form-inline">
+        <input type="text" class="form-control" style="display: inline!important; width: 200px;"
+               *ngIf="showSearchTextbox" [(ngModel)]="searchListName"
+               (keydown.esc)="onPressEscape()" #searchTextbox>
+        <app-content-header-button class="" (click)="openAddNewListModal()"><u>N</u>ew</app-content-header-button>
+      </div>
     </app-content-header>
 
     <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
 
-    <app-card-list *ngFor="let favoriteList of sortByTsCreated(favoriteLists)"
+    <app-card-list *ngFor="let favoriteList of sortedAndFiltered(favoriteLists)"
                    [title]="favoriteList.name"
                    (onDelete)="deleteList(favoriteList.id)"
                    (onInfo)="navigateToList(favoriteList.id)">{{favoriteList.status}}</app-card-list>
@@ -25,24 +30,58 @@ import {ShortcutInput} from "ng-keyboard-shortcuts";
 })
 export class ListOverviewComponent implements OnInit, AfterViewInit {
   favoriteLists: FavoriteList[];
+  showSearchTextbox: boolean = false;
+  searchListName: string = ''
+  @ViewChild('searchTextbox') searchTextbox: ElementRef
 
   constructor(private router: Router,
               private favoriteListApi: FavoriteListApi,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private cdRef: ChangeDetectorRef) {
     this.navigateToList = this.navigateToList.bind(this);
   }
 
   shortcuts: ShortcutInput[] = [];
+
   ngAfterViewInit(): void {
     this.shortcuts.push(
       {
         key: ["n"],
         label: "New item",
-        description: "N",
+        description: "New item",
         command: () => this.openAddNewListModal(),
         preventDefault: true
       },
+      {
+        key: ["cmd + f"],
+        label: "Search list",
+        description: "Search list",
+        command: () => this.toggleSearchTextbox(),
+        preventDefault: true
+      },
+      {
+        key: ["esc"],
+        label: "Escape",
+        description: "Escape",
+        command: () => this.onPressEscape(),
+        preventDefault: true
+      },
     );
+  }
+
+  onPressEscape() {
+    this.showSearchTextbox = false;
+    this.searchListName = ''
+  }
+
+  toggleSearchTextbox() {
+    this.showSearchTextbox = !this.showSearchTextbox;
+    if (!this.showSearchTextbox) {
+      this.searchListName = ''
+    } else {
+      this.cdRef.detectChanges()
+      this.searchTextbox.nativeElement.focus();
+    }
   }
 
   ngOnInit(): void {
@@ -70,11 +109,18 @@ export class ListOverviewComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/list/' + listId]);
   }
 
-  sortByTsCreated(favoriteLists: FavoriteList[]) {
+  sortedAndFiltered(favoriteLists: FavoriteList[]) {
     // Newest lists must be on top.
-    return favoriteLists.sort((a, b) => {
+    const sortedList = favoriteLists.sort((a, b) => {
       return new Date(b.tsCreated).getTime() - new Date(a.tsCreated).getTime()
     })
+
+    // If we have our search enabled, filter the result.
+    if (this.showSearchTextbox) {
+      return sortedList.filter((list) => list.name.indexOf(this.searchListName) >= 0)
+    }
+
+    return sortedList;
   }
 
 }

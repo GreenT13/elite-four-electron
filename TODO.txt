@@ -1,5 +1,2 @@
-== UX things ==
-- Filtering on items (something like control+F?)
-
 == Concrete actions ==
 - Show nrOfItemsToBeShownOnScreen somewhere on the screen

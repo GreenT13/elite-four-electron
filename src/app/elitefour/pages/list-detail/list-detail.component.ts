@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FavoriteItem, FavoriteList, FavoriteListStatus} from "../../backend/favorite-list-interfaces";
 import {FavoriteListApi} from "../../backend/favorite-list-api";
@@ -23,12 +23,16 @@ export class ListDetailComponent implements OnInit, AfterViewInit {
 
   favoriteList: FavoriteList = {id: 0, name: '', status: undefined, tsCreated: new Date(), items: [], nrOfItemsToBeShownOnScreen: 20}
 
+  showSearchTextbox: boolean = false;
+  searchItemName: string = ''
+  @ViewChild('searchTextbox') searchTextbox: ElementRef
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private favoriteListApi: FavoriteListApi,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private cdRef: ChangeDetectorRef) {
   }
-
 
   shortcuts: ShortcutInput[] = [];
   ngAfterViewInit(): void {
@@ -40,9 +44,37 @@ export class ListDetailComponent implements OnInit, AfterViewInit {
         command: () => this.openItemModal(undefined),
         preventDefault: true
       },
+      {
+        key: ["cmd + f"],
+        label: "Search list",
+        description: "Search list",
+        command: () => this.toggleSearchTextbox(),
+        preventDefault: true
+      },
+      {
+        key: ["esc"],
+        label: "Escape",
+        description: "Escape",
+        command: () => this.onPressEscape(),
+        preventDefault: true
+      },
     );
   }
 
+  onPressEscape() {
+    this.showSearchTextbox = false;
+    this.searchItemName = ''
+  }
+
+  toggleSearchTextbox() {
+    this.showSearchTextbox = !this.showSearchTextbox;
+    if (!this.showSearchTextbox) {
+      this.searchItemName = ''
+    } else {
+      this.cdRef.detectChanges()
+      this.searchTextbox.nativeElement.focus();
+    }
+  }
 
   ngOnInit(): void {
     const listId = +this.route.snapshot.paramMap.get('id');
@@ -97,8 +129,14 @@ export class ListDetailComponent implements OnInit, AfterViewInit {
       }}, () => {})
   }
 
-  sortByFavoriteThenId(favoriteItems: FavoriteItem[]) {
-    return ExportModalComponent.sortItems(favoriteItems);
+  sortAndFilter(favoriteItems: FavoriteItem[]) {
+    const sortedItems = ExportModalComponent.sortItems(favoriteItems);
+
+    if (this.showSearchTextbox) {
+      return sortedItems.filter((item) => item.name.indexOf(this.searchItemName) >= 0)
+    }
+
+    return sortedItems;
   }
 
   resetAlgorithm() {
