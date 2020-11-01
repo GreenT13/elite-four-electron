@@ -1,5 +1,9 @@
-# Elite Four
-Elite Four is a desktop application made for picking favorites out of large lists.
+# Elite Four ![GitHub release (latest by date)](https://img.shields.io/github/v/release/GreenT13/elite-four-electron)
+Elite Four is a desktop application made for picking favorites out of large lists
+
+![Example](Example.gif)
+
+Download the latest version from the github release. Inside the application is a help page with details on how everything works!
 
 ## Inspiration
 It is inspired by the website https://www.dragonflycave.com/favorite.html. It is basically the same application,
