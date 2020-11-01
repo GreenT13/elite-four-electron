@@ -16,7 +16,7 @@ import {FavoriteItem, FavoriteList} from "../../backend/favorite-list-interfaces
       <p>Items will be exported.</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="exportAll()">Export all times</button>
+      <button type="button" class="btn btn-primary" (click)="exportAll()">Export all items</button>
       <button ngbAutofocus type="button" class="btn btn-primary" (click)="exportOnlyFavorites()">Export only favorites
       </button>
     </div>
