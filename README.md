@@ -1,4 +1,5 @@
-# Elite Four ![GitHub release (latest by date)](https://img.shields.io/github/v/release/GreenT13/elite-four-electron)
+# Elite Four [![GitHub release (latest by date)](https://img.shields.io/github/v/release/GreenT13/elite-four-electron)](https://github.com/GreenT13/elite-four-electron/releases)
+
 Elite Four is a desktop application made for picking favorites out of large lists
 
 ![Example](Example.gif)
