@@ -15,7 +15,9 @@ but you can now customize which list you input! You can also customize the maxim
 This is an Angular application, using the Electron framework to be used as a desktop application.
 
 ### Running locally
-```npm run start```
+```
+npm run start
+```
 
 ### Creating release
 ```
